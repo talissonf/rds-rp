@@ -27,8 +27,6 @@ const useProducts = () => {
           allFeatures.push(...product.features);
         }
       });
-
-      // Remove duplicatas usando Set e converte de volta para array
       setPreferences([...new Set(allPreferences)]);
       setFeatures([...new Set(allFeatures)]);
     } catch (err) {
