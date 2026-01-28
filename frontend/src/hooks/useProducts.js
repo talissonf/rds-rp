@@ -20,19 +20,17 @@ const useProducts = () => {
       setProducts(products);
 
       products.forEach((product) => {
-        const productPreferences = product.preferences
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 2);
-        allPreferences.push(...productPreferences);
-
-        const productFeatures = product.features
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 2);
-        allFeatures.push(...productFeatures);
+        if (product.preferences) {
+          allPreferences.push(...product.preferences);
+        }
+        if (product.features) {
+          allFeatures.push(...product.features);
+        }
       });
 
-      setPreferences(allPreferences);
-      setFeatures(allFeatures);
+      // Remove duplicatas usando Set e converte de volta para array
+      setPreferences([...new Set(allPreferences)]);
+      setFeatures([...new Set(allFeatures)]);
     } catch (err) {
       console.error('Erro ao obter os produtos:', err);
       setError('Não foi possível carregar os produtos. Tente novamente.');
